@@ -1,13 +1,25 @@
-import express from 'express';
+import {Router, Request, Response} from 'express';
 
-import {TController} from "../types";
+import {IController} from "./types";
 
-const router = express.Router();
+export class HomeController implements IController {
+    private readonly route: string = "/";
+    private readonly router: Router = Router();
 
-const route = '/';
+    constructor() {
+        this.router.get('/', this.index);
+    }
 
-router.get('/',(req, res) => {
-    res.send('Welcome!');
-})
+    private index(req: Request, res: Response): void {
+        res.send('Hi there!')
+    };
 
-export const controller: TController =  { route, router };
+    getRoute(): string {
+        return this.route;
+    }
+
+    getRouter(): Router {
+        return this.router;
+    }
+
+}
