@@ -1,7 +1,13 @@
-import {HomeController} from "./home";
+import {Express} from "express";
 
-const controllers = [
-    new HomeController()
-]
+import {HomeController} from "./homeController";
 
-export {controllers};
+const controllers = [HomeController];
+
+const registerControllers = (app: Express) => {
+    controllers.forEach((controller) => {
+        new controller(app);
+    })
+};
+
+export {registerControllers};

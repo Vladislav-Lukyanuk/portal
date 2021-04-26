@@ -8,7 +8,8 @@ const envConfig = Dotenv.config({ path: path.join(__dirname, 'env', '.env.local'
 const baseConfig = require('./webpack-config-base');
 
 const config = {
-    mode: 'development'
+    mode: 'development',
+    devtool: 'source-map'
     // plugins: [
     //     new DefinePlugin({
     //         'process.env': JSON.stringify(envConfig),

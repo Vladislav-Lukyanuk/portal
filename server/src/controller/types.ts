@@ -1,6 +1,9 @@
-import {Router} from "express";
+import {Request, Response, Router} from "express";
 
 export interface IController {
-    getRoute: () => string;
-    getRouter: () => Router;
+    registerEndpoint: (
+        method: 'get' | 'post' | 'put' | 'delete',
+        path: string,
+        callback: <T>(req: Request, res: Response) => T | void
+    ) => void;
 }
