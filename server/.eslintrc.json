@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        //конфиг гугла
+        "google",
+        // базовые правила для ts
+        "plugin:@typescript-eslint/recommended",
+        // правила импорта для ts
+        "plugin:import/typescript"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "eslint-plugin-import"
+    ],
+    "rules": {
+        "require-jsdoc": "off",
+        "new-cap": "off"
+    }
+}
