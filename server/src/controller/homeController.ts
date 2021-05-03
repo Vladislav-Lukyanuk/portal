@@ -1,6 +1,8 @@
 import { Response, Express } from "express";
+
+import { WordRepository } from "db/wordRepository";
+
 import { Controller } from "./controller";
-import { WordRepository } from "../db/wordRepository";
 
 export class HomeController extends Controller {
   private wordRepository;

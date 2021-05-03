@@ -1,4 +1,5 @@
-import { Pool, QueryResult } from "pg";
+import { Pool } from "pg";
+
 import { IRepository } from "./IRepository";
 
 const pool = new Pool({
