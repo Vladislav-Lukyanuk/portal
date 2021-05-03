@@ -10,7 +10,9 @@ const pool = new Pool({
 });
 
 export abstract class Repository<T> implements IRepository<T> {
-  query(sql: string, params: (number | string)[]): Promise<QueryResult> {
-    return pool.query(sql, params);
+  async get(sql: string, params: (number | string)[]): Promise<T[]> {
+    const { rows } = await pool.query(sql, params);
+
+    return rows;
   }
 }

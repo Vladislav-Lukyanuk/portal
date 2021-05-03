@@ -14,8 +14,8 @@ export class HomeController extends Controller {
   }
 
   private index(_, res: Response): void {
-    this.wordRepository.query("select * from words", []).then(({ rows }) => {
-      res.send(rows);
+    this.wordRepository.get("select * from words", []).then((words) => {
+      res.send(words);
     });
   }
 }
