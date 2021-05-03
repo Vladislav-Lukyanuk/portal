@@ -1,14 +1,21 @@
 import { Response, Express } from "express";
 import { Controller } from "./controller";
+import { WordRepository } from "../db/wordRepository";
 
 export class HomeController extends Controller {
+  private wordRepository;
+
   constructor(app: Express) {
     super("/", app);
 
-    this.registerEndpoint("get", "/", this.index);
+    this.wordRepository = new WordRepository();
+
+    this.registerEndpoint("get", "/", this.index.bind(this));
   }
 
   private index(_, res: Response): void {
-    res.send("Hi there!");
+    this.wordRepository.query("select * from words", []).then(({ rows }) => {
+      res.send(rows);
+    });
   }
 }
