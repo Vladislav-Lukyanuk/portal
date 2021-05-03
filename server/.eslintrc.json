@@ -9,7 +9,9 @@
         // базовые правила для ts
         "plugin:@typescript-eslint/recommended",
         // правила импорта для ts
-        "plugin:import/typescript"
+        "plugin:import/typescript",
+        // Отключает прафила prettier, которые могут конфликтовать с eslint
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -17,8 +19,12 @@
         "sourceType": "module"
     },
     "plugins": [
+        //Запускает плагин для отслеживания кода в стиле TS
         "@typescript-eslint",
-        "eslint-plugin-import"
+        //Запускает плагин для отслеживания импортов
+        "eslint-plugin-import",
+        //Запускает Prettier как правила ESLint
+        "eslint-plugin-prettier"
     ],
     "rules": {
         "require-jsdoc": "off",
