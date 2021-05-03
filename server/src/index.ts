@@ -1,15 +1,15 @@
 import "reflect-metadata";
-import express from "express";
+import { InversifyExpressServer } from "inversify-express-utils";
 
-import { registerControllers } from "@app/controller";
+import "@app/controller";
 
-import "@app/ioc/ioc.config";
+import { container } from "@app/ioc/ioc.config";
 
 const PORT = process.env.PORT;
 
-const app = express();
+const server = new InversifyExpressServer(container);
 
-registerControllers(app);
+const app = server.build();
 
 app.listen(PORT, () => {
   console.log(`Server start at ${PORT} port`);
