@@ -1,6 +1,6 @@
-import {Express} from 'express';
+import { Express } from "express";
 
-import {HomeController} from './homeController';
+import { HomeController } from "./homeController";
 
 const controllers = [HomeController];
 
@@ -10,4 +10,4 @@ const registerControllers = (app: Express) => {
   });
 };
 
-export {registerControllers};
+export { registerControllers };

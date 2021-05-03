@@ -1,6 +1,6 @@
-import express from 'express';
+import express from "express";
 
-import {registerControllers} from './controller';
+import { registerControllers } from "./controller";
 
 const PORT = process.env.port || 3000;
 
