@@ -1,16 +1,18 @@
 import { Response, Express } from "express";
 
-import { WordRepository } from "db/wordRepository";
+import { container } from "@app/ioc/ioc.config";
+import { DECLARATIONS } from "@app/ioc/declarations";
+import { IWordRepository } from "@app/db/IWordRepository";
 
 import { Controller } from "./controller";
 
 export class HomeController extends Controller {
-  private wordRepository: WordRepository;
+  private wordRepository: IWordRepository;
 
   constructor(app: Express) {
     super("/", app);
 
-    this.wordRepository = new WordRepository();
+    this.wordRepository = container.get(DECLARATIONS.WordRepository);
 
     this.registerEndpoint("get", "/", this.index.bind(this));
   }

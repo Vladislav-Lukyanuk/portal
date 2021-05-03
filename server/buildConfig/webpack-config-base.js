@@ -22,9 +22,7 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
     alias: {
-      controller: path.resolve(__dirname, "../src/controller"),
-      db: path.resolve(__dirname, "../src/db"),
-      model: path.resolve(__dirname, "../src/model"),
+      "@app": path.resolve(__dirname, "../src"),
     },
   },
   externals: [nodeExternals()],

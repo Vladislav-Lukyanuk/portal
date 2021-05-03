@@ -35,6 +35,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "pg": "^8.6.0"
+    "inversify": "^5.1.1",
+    "pg": "^8.6.0",
+    "reflect-metadata": "^0.1.13"
   }
 }

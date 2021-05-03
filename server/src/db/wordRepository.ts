@@ -1,9 +1,12 @@
-import { Word } from "model/word";
+import { injectable } from "inversify";
 
-import { DbAdapter } from "./adapter/dbAdapter";
-import { ICRUDRepository } from "./ICRUDRepository";
+import { DbAdapter } from "@app/db/adapter/dbAdapter";
+import { Word } from "@app/model/word";
 
-export class WordRepository implements ICRUDRepository<Word> {
+import { IWordRepository } from "./IWordRepository";
+
+@injectable()
+export class WordRepository implements IWordRepository {
   private readonly dbAdapter: DbAdapter;
 
   constructor() {
