@@ -13,9 +13,9 @@ export class HomeController extends Controller {
     this.registerEndpoint("get", "/", this.index.bind(this));
   }
 
-  private index(_, res: Response): void {
-    this.wordRepository.get("select * from words", []).then((words) => {
-      res.send(words);
-    });
+  private async index(_, res: Response): Promise<void> {
+    const response = await this.wordRepository.get("select * from words", []);
+
+    res.send(response);
   }
 }
