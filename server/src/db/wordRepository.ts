@@ -16,4 +16,8 @@ export class WordRepository implements IWordRepository {
   getALl(): Promise<Word[]> {
     return this.dbAdapter.query("select * from words", []);
   }
+
+  add(obj: Word): Promise<Word> {
+    return undefined;
+  }
 }
