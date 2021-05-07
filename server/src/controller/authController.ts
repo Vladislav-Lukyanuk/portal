@@ -7,7 +7,9 @@ import {
 } from "inversify-express-utils";
 
 import { DECLARATIONS } from "@app/ioc/declarations";
-import { IAuthService } from "@app/service/IAuthService";
+import { IAuthService } from "@app/service/auth/IAuthService";
+import { AuthDto } from "@app/dto/authDto";
+import { TokenDto } from "@app/dto/tokenDto";
 
 @controller("/auth")
 export class AuthController extends BaseHttpController {
@@ -16,11 +18,8 @@ export class AuthController extends BaseHttpController {
 
   @httpPost("/sign-up")
   public async signUP(
-    @requestBody() dto: { login: string; password: string }
-  ): Promise<void> {
-    console.log(dto.login, dto.password);
-    // const user = await this.authService.signUp();
-
-    return;
+    @requestBody() { login, password }: AuthDto
+  ): Promise<TokenDto> {
+    return await this.authService.signUp(login, password);
   }
 }
