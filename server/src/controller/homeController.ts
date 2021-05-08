@@ -6,7 +6,7 @@ import {
 } from "inversify-express-utils";
 
 import { DECLARATIONS } from "@app/ioc/declarations";
-import { IWordRepository } from "@app/db/IWordRepository";
+import { IWordRepository } from "@app/db/repository/wordRepository/IWordRepository";
 import { Word } from "@app/model/word";
 
 @controller("/")

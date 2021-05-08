@@ -3,9 +3,9 @@ import { Role } from "@app/model/role";
 export class User {
   private _id: number;
   private _email: string;
-  private _passwordHash: string;
+  private _password_hash: string;
   private _role: Role;
-  private _hasBan: boolean;
+  private _has_ban: boolean;
 
   constructor(
     email: string,
@@ -15,9 +15,9 @@ export class User {
     id = 0
   ) {
     this._email = email;
-    this._passwordHash = passwordHash;
+    this._password_hash = passwordHash;
     this._role = role;
-    this._hasBan = hasBan;
+    this._has_ban = hasBan;
     this._id = id;
   }
 
@@ -37,12 +37,12 @@ export class User {
     this._email = value;
   }
 
-  get passwordHash(): string {
-    return this._passwordHash;
+  get password_hash(): string {
+    return this._password_hash;
   }
 
-  set passwordHash(value: string) {
-    this._passwordHash = value;
+  set password_hash(value: string) {
+    this._password_hash = value;
   }
 
   get role(): Role {
@@ -53,11 +53,11 @@ export class User {
     this._role = value;
   }
 
-  get hasBan(): boolean {
-    return this._hasBan;
+  get has_ban(): boolean {
+    return this._has_ban;
   }
 
-  set hasBan(value: boolean) {
-    this._hasBan = value;
+  set has_ban(value: boolean) {
+    this._has_ban = value;
   }
 }

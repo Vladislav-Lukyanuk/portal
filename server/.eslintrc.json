@@ -28,6 +28,7 @@
     ],
     "rules": {
         "require-jsdoc": "off",
-        "new-cap": "off"
+        "new-cap": "off",
+        "camelcase": "warn"
     }
 }

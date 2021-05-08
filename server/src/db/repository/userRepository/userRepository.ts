@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 
-import { IUserRepository } from "@app/db/IUserRepository";
+import { IUserRepository } from "@app/db/repository/userRepository/IUserRepository";
 import { User } from "@app/model/user";
 import { DbAdapter } from "@app/db/adapter/dbAdapter";
 
@@ -18,7 +18,7 @@ export class UserRepository implements IUserRepository {
         " (email, password_hash, role, has_ban)" +
         " values ($1, $2, $3, $4)" +
         " RETURNING id, email, password_hash, role, has_ban",
-      [obj.email, obj.passwordHash, obj.role, String(obj.hasBan)]
+      [obj.email, obj.password_hash, obj.role, String(obj.has_ban)]
     );
 
     return user;
