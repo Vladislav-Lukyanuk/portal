@@ -12,11 +12,16 @@ export class UserRepository implements IUserRepository {
     this.dbAdapter = DbAdapter.getInstance();
   }
 
-  async add(obj: User): Promise<void> {
-    await this.dbAdapter.query<User>(
-      "insert into users (email, password_hash, role, has_ban) values ($1, $2, $3, $4)",
+  async add(obj: User): Promise<User> {
+    const [user] = await this.dbAdapter.query<User>(
+      "insert into users" +
+        " (email, password_hash, role, has_ban)" +
+        " values ($1, $2, $3, $4)" +
+        " RETURNING id, email, password_hash, role, has_ban",
       [obj.email, obj.passwordHash, obj.role, String(obj.hasBan)]
     );
+
+    return user;
   }
 
   getALl(): Promise<User[]> {
