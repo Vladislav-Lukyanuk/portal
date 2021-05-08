@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { IAuthService } from "@app/service/auth/IAuthService";
 import { IUserRepository } from "@app/db/repository/userRepository/IUserRepository";
 import { ITokenRepository } from "@app/db/repository/tokenRepository/ITokenRepository";
+import { ITransactionRepository } from "@app/db/ITransactionRepository";
 import { DECLARATIONS } from "@app/ioc/declarations";
 
 import { User } from "@app/model/user";
@@ -17,16 +18,24 @@ import { Token } from "@app/model/token";
 export class AuthService implements IAuthService {
   private readonly userRepository: IUserRepository;
   private readonly tokenRepository: ITokenRepository;
+  private readonly transactionRepository: ITransactionRepository;
 
   constructor(
     @inject(DECLARATIONS.UserRepository) userRepository: IUserRepository,
-    @inject(DECLARATIONS.TokenRepository) tokenRepository: ITokenRepository
+    @inject(DECLARATIONS.TokenRepository) tokenRepository: ITokenRepository,
+    @inject(DECLARATIONS.TransactionRepository)
+    transactionRepository: ITransactionRepository
   ) {
     this.userRepository = userRepository;
     this.tokenRepository = tokenRepository;
+    this.transactionRepository = transactionRepository;
   }
 
-  async signIn(login: string, password: string): Promise<TToken> {
+  async signIn(
+    login: string,
+    password: string,
+    shouldStartTransaction = true
+  ): Promise<TToken> {
     const user = await this.userRepository.getByEmail(login);
 
     if (user === undefined) {
@@ -39,12 +48,20 @@ export class AuthService implements IAuthService {
       throw new ApiException("Username or password isn't correct");
     }
 
+    if (shouldStartTransaction) {
+      await this.transactionRepository.startTransaction();
+    }
+
     const refreshTokenObj = await this.tokenRepository.add(
       new Token(user.id, uuidv4())
     );
 
+    const accessToken = this.generateJwt(user);
+
+    await this.transactionRepository.commitTransaction();
+
     return {
-      accessToken: this.generateJwt(user),
+      accessToken,
       refreshToken: refreshTokenObj.refresh_token,
     };
   }
@@ -58,9 +75,11 @@ export class AuthService implements IAuthService {
 
     const passwordHash = await this.hashPassword(password);
 
+    await this.transactionRepository.startTransaction();
+
     await this.userRepository.add(new User(login, passwordHash));
 
-    return this.signIn(login, password);
+    return this.signIn(login, password, false);
   }
 
   private async hashPassword(password: string) {

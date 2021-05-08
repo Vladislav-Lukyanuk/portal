@@ -1,10 +1,12 @@
 import "reflect-metadata";
 import { InversifyExpressServer } from "inversify-express-utils";
+import bodyParser from "body-parser";
 
 import "@app/controller";
 
 import { container } from "@app/ioc/ioc.config";
-import bodyParser from "body-parser";
+
+import { exceptionHandler } from "@app/config/exceptionHandler";
 
 const PORT = process.env.PORT;
 
@@ -17,10 +19,7 @@ server.setConfig((app) => {
 });
 
 server.setErrorConfig((app) => {
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send("Something broke!");
-  });
+  app.use(exceptionHandler);
 });
 
 const app = server.build();
