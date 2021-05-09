@@ -21,8 +21,8 @@ export const authMiddleware = (config?: { role: Role }) => (
   };
 
   (async () => {
-    const token = req.headers["authorization"];
-    const userObj = await authRepository.verifyToken(token);
+    const token: string | undefined = req.headers["authorization"];
+    const userObj = await authRepository.verifyToken(token || "");
 
     if (!userObj) {
       return declineRequest();

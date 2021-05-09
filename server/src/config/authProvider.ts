@@ -20,9 +20,9 @@ export class AuthProvider implements interfaces.AuthProvider {
     res: Response,
     next: NextFunction
   ): Promise<interfaces.Principal> {
-    const token = req.headers["authorization"];
+    const token: string | undefined = req.headers["authorization"];
 
-    const userObj = await this._authService.verifyToken(token);
+    const userObj = await this._authService.verifyToken(token || "");
 
     if (!userObj) {
       return new Principal(new User("", ""));
