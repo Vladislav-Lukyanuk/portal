@@ -27,4 +27,8 @@ export class TokenRepository implements ITokenRepository {
   getALl(): Promise<Token[]> {
     return Promise.resolve([]);
   }
+
+  get(id: number): Promise<Token> {
+    return Promise.resolve(undefined);
+  }
 }

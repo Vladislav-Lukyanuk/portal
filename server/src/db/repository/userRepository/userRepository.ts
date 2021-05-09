@@ -36,4 +36,13 @@ export class UserRepository implements IUserRepository {
 
     return user;
   }
+
+  async get(id: number): Promise<User> {
+    const [user] = await this.dbAdapter.query<User | undefined>(
+      "select * from users where id = $1",
+      [id]
+    );
+
+    return user;
+  }
 }

@@ -42,9 +42,9 @@ export class AuthService implements IAuthService {
       throw new ApiException("User isn't exist");
     }
 
-    const passwordHash = await this.hashPassword(password);
+    const passwordHash = await this._hashPassword(password);
 
-    if (await this.checkPassword(passwordHash, user.password_hash)) {
+    if (await this._checkPassword(passwordHash, user.password_hash)) {
       throw new ApiException("Username or password isn't correct");
     }
 
@@ -56,7 +56,9 @@ export class AuthService implements IAuthService {
       new Token(user.id, uuidv4())
     );
 
-    const accessToken = this.generateJwt(user);
+    delete user.password_hash;
+
+    const accessToken = this._generateJwt(user);
 
     await this.transactionRepository.commitTransaction();
 
@@ -73,7 +75,7 @@ export class AuthService implements IAuthService {
       throw new ApiException("User is already exist");
     }
 
-    const passwordHash = await this.hashPassword(password);
+    const passwordHash = await this._hashPassword(password);
 
     await this.transactionRepository.startTransaction();
 
@@ -82,23 +84,45 @@ export class AuthService implements IAuthService {
     return this.signIn(login, password, false);
   }
 
-  private async hashPassword(password: string) {
+  verifyToken(token: string): User | null {
+    return this._verifyJwt(token);
+  }
+
+  private async _hashPassword(password: string) {
     const salt = await bcrypt.genSalt(Number(process.env.HASH_SALT_ROUNDS));
     const hash = await bcrypt.hash(password, salt);
 
     return hash;
   }
 
-  private async checkPassword(password: string, passwordHash: string) {
+  private async _checkPassword(password: string, passwordHash: string) {
     return await bcrypt.compare(password, passwordHash);
   }
 
-  private generateJwt(user: User): string {
+  private _generateJwt(user: User): string {
     return jwt.sign(user, process.env.JWT_SECRET, {
-      algorithm: "RS512",
+      algorithm: "HS256",
       expiresIn: "1d",
       issuer: process.env.JWT_ISSUER,
       audience: process.env.JWT_AUDIENCE,
     });
+  }
+
+  private _verifyJwt(token: string): User | null {
+    const tokenStruct = token.split(" ");
+    const plainTokenString = tokenStruct[tokenStruct.length - 1];
+
+    let user: User = null;
+
+    try {
+      user = jwt.verify(plainTokenString, process.env.JWT_SECRET, {
+        issuer: process.env.JWT_ISSUER,
+        audience: process.env.JWT_AUDIENCE,
+      }) as User;
+    } catch {
+      // TODO: add logger here
+    }
+
+    return user;
   }
 }

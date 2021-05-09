@@ -1,2 +1,2 @@
-import "./homeController";
+import "./wordController";
 import "./authController";

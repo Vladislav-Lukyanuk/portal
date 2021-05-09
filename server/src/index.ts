@@ -7,10 +7,17 @@ import "@app/controller";
 import { container } from "@app/ioc/ioc.config";
 
 import { exceptionHandler } from "@app/config/exceptionHandler";
+import { AuthProvider } from "@app/config/authProvider";
 
 const PORT = process.env.PORT;
 
-const server = new InversifyExpressServer(container);
+const server = new InversifyExpressServer(
+  container,
+  null,
+  null,
+  null,
+  AuthProvider
+);
 
 server.setConfig((app) => {
   app.use(bodyParser.urlencoded({ extended: false }));

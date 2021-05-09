@@ -8,9 +8,10 @@ import {
 import { DECLARATIONS } from "@app/ioc/declarations";
 import { IWordRepository } from "@app/db/repository/wordRepository/IWordRepository";
 import { Word } from "@app/model/word";
+import { authMiddleware } from "@app/middleware/authMiddleware";
 
-@controller("/")
-export class HomeController extends BaseHttpController {
+@controller("/word", authMiddleware())
+export class WordController extends BaseHttpController {
   @inject(DECLARATIONS.WordRepository)
   private readonly wordRepository: IWordRepository;
 

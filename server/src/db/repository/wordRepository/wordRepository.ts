@@ -20,4 +20,8 @@ export class WordRepository implements IWordRepository {
   add(obj: Word): Promise<Word> {
     return Promise.resolve(undefined);
   }
+
+  get(id: number): Promise<Word> {
+    return Promise.resolve(undefined);
+  }
 }
