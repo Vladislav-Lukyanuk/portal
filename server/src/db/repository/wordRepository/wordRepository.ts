@@ -59,6 +59,7 @@ export class WordRepository implements IWordRepository {
     return Promise.resolve(undefined);
   }
 
+  // TODO: extract to separte repository
   async createUserPool(
     userId: number,
     poolName: string
