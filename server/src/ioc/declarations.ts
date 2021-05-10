@@ -5,4 +5,5 @@ export const DECLARATIONS = {
   TransactionRepository: Symbol.for("TransactionRepository"),
 
   AuthService: Symbol.for("AuthService"),
+  WordService: Symbol.for("WordService"),
 };

@@ -62,6 +62,7 @@ CREATE TABLE pool_words (
     id INT GENERATED ALWAYS AS IDENTITY,
     user_pool_id INT NOT NULL,
     word_id INT NOT NULL,
+    accept_number INT NOT NULL,
     PRIMARY KEY(id),
     CONSTRAINT fk_user_words_pool
             FOREIGN KEY(user_pool_id)

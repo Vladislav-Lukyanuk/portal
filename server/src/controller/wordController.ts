@@ -2,21 +2,25 @@ import { inject } from "inversify";
 import {
   BaseHttpController,
   controller,
-  httpGet,
+  httpPost,
+  queryParam,
 } from "inversify-express-utils";
 
 import { DECLARATIONS } from "@app/ioc/declarations";
-import { IWordRepository } from "@app/db/repository/wordRepository/IWordRepository";
-import { Word } from "@app/model/word";
 import { authMiddleware } from "@app/middleware/authMiddleware";
+import { IWordService } from "@app/service/word/IWordService";
 
 @controller("/word", authMiddleware())
 export class WordController extends BaseHttpController {
-  @inject(DECLARATIONS.WordRepository)
-  private readonly wordRepository: IWordRepository;
+  @inject(DECLARATIONS.WordService)
+  private readonly _wordService: IWordService;
 
-  @httpGet("/")
-  public async get(): Promise<Word[]> {
-    return await this.wordRepository.getALl();
+  @httpPost("/pool")
+  public async createUserPool(
+    @queryParam("name") poolName: string
+  ): Promise<any> {
+    const userId = this.httpContext.user.details.id as number;
+
+    return await this._wordService.createUserPool(userId, poolName);
   }
 }

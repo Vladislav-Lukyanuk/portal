@@ -17,6 +17,9 @@ import { ITransactionRepository } from "@app/db/ITransactionRepository";
 import { IAuthService } from "@app/service/auth/IAuthService";
 import { AuthService } from "@app/service/auth/authService";
 
+import { IWordService } from "@app/service/word/IWordService";
+import { WordService } from "@app/service/word/wordService";
+
 const container = new Container();
 
 container.bind<IWordRepository>(DECLARATIONS.WordRepository).to(WordRepository);
@@ -29,5 +32,6 @@ container
   .to(TransactionRepository);
 
 container.bind<IAuthService>(DECLARATIONS.AuthService).to(AuthService);
+container.bind<IWordService>(DECLARATIONS.WordService).to(WordService);
 
 export { container };

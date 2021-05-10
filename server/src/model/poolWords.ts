@@ -2,11 +2,18 @@ export class PoolWords {
   private _id: number;
   private _user_pool_id: number;
   private _word_id: number;
+  private _accept_number: number;
 
-  constructor(id: number, user_pool_id: number, word_id: number) {
+  constructor(
+    id: number,
+    user_pool_id: number,
+    word_id: number,
+    accept_number: number
+  ) {
     this._id = id;
     this._user_pool_id = user_pool_id;
     this._word_id = word_id;
+    this._accept_number = accept_number;
   }
 
   get id(): number {
@@ -31,5 +38,13 @@ export class PoolWords {
 
   set word_id(value: number) {
     this._word_id = value;
+  }
+
+  get accept_number(): number {
+    return this._accept_number;
+  }
+
+  set accept_number(value: number) {
+    this._accept_number = value;
   }
 }
