@@ -27,9 +27,46 @@ CREATE TABLE tokens (
     	  REFERENCES users(id)
 );
 
+CREATE TABLE categories (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR NOT NULL,
+    icon_src VARCHAR,
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE words (
     id INT GENERATED ALWAYS AS IDENTITY,
-    word VARCHAR,
-    trans VARCHAR,
-    PRIMARY KEY(id)
+    category_id INT NOT NULL,
+    word VARCHAR NOT NULL,
+    transcription VARCHAR NOT NULL,
+    image_src VARCHAR,
+    PRIMARY KEY(id),
+    CONSTRAINT fk_word_category
+            FOREIGN KEY(category_id)
+            REFERENCES categories(id)
+);
+
+CREATE TABLE user_words_pools (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    user_id INT NOT NULL,
+    name VARCHAR NOT NULL,
+    learned_number INT NOT NULL,
+    total_number INT NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT fk_user_pool
+            FOREIGN KEY(user_id)
+            REFERENCES users(id)
+);
+
+CREATE TABLE pool_words (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    user_pool_id INT NOT NULL,
+    word_id INT NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT fk_user_words_pool
+            FOREIGN KEY(user_pool_id)
+            REFERENCES user_words_pools(id),
+    CONSTRAINT fk_pool_word
+            FOREIGN KEY(word_id)
+            REFERENCES words(id)
 );
