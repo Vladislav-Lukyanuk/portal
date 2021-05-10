@@ -59,7 +59,18 @@ export class WordRepository implements IWordRepository {
     return Promise.resolve(undefined);
   }
 
-  createUserPool(userId: number, poolName: string): Promise<UserWordsPool> {
-    return Promise.resolve(undefined);
+  async createUserPool(
+    userId: number,
+    poolName: string
+  ): Promise<UserWordsPool> {
+    const [pool] = await this.dbAdapter.query<UserWordsPool>(
+      "insert into user_words_pools" +
+        " (user_id, name, learned_number, total_number)" +
+        " values ($1, $2, $3, $4)" +
+        " RETURNING id, user_id, name, learned_number, total_number",
+      [userId, poolName, 0, 0]
+    );
+
+    return pool;
   }
 }
