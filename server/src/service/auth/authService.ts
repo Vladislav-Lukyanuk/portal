@@ -42,9 +42,7 @@ export class AuthService implements IAuthService {
       throw new ApiException("User isn't exist");
     }
 
-    const passwordHash = await this._hashPassword(password);
-
-    if (await this._checkPassword(passwordHash, user.password_hash)) {
+    if (!(await this._checkPassword(password, user.password_hash))) {
       throw new ApiException("Username or password isn't correct");
     }
 

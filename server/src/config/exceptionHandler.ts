@@ -16,5 +16,6 @@ export const exceptionHandler = (
     return;
   }
   // TODO: add a logger here
+  console.log(err.message, err.stack);
   res.status(500).send("Server can't execute your request. We are sorry.");
 };
