@@ -9,6 +9,8 @@ import {
 import { DECLARATIONS } from "@app/ioc/declarations";
 import { authMiddleware } from "@app/middleware/authMiddleware";
 import { IWordService } from "@app/service/word/IWordService";
+import { WordPoolDto } from "@app/dto/wordPoolDto";
+import { objMap } from "@app/utilities/objMap";
 
 @controller("/word", authMiddleware())
 export class WordController extends BaseHttpController {
@@ -18,9 +20,18 @@ export class WordController extends BaseHttpController {
   @httpPost("/pool")
   public async createUserPool(
     @queryParam("name") poolName: string
-  ): Promise<any> {
+  ): Promise<WordPoolDto> {
     const userId = this.httpContext.user.details.id as number;
 
-    return await this._wordService.createUserPool(userId, poolName);
+    return objMap(
+      await this._wordService.createUserPool(userId, poolName),
+      (model) => ({
+        id: model.id,
+        userId: model.user_id,
+        name: model.name,
+        learnedNumber: model.learned_number,
+        totalNumber: model.total_number,
+      })
+    );
   }
 }

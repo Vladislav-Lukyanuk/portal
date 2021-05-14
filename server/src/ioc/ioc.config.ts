@@ -14,6 +14,9 @@ import { ITokenRepository } from "@app/db/repository/tokenRepository/ITokenRepos
 import { TransactionRepository } from "@app/db/transactionRepository";
 import { ITransactionRepository } from "@app/db/ITransactionRepository";
 
+import { IUserWordPoolRepository } from "@app/db/repository/userWordPool/IUserWordPoolRepository";
+import { UserWordPoolRepository } from "@app/db/repository/userWordPool/userWordPoolRepository";
+
 import { IAuthService } from "@app/service/auth/IAuthService";
 import { AuthService } from "@app/service/auth/authService";
 
@@ -30,6 +33,9 @@ container
 container
   .bind<ITransactionRepository>(DECLARATIONS.TransactionRepository)
   .to(TransactionRepository);
+container
+  .bind<IUserWordPoolRepository>(DECLARATIONS.UserWordPoolRepository)
+  .to(UserWordPoolRepository);
 
 container.bind<IAuthService>(DECLARATIONS.AuthService).to(AuthService);
 container.bind<IWordService>(DECLARATIONS.WordService).to(WordService);

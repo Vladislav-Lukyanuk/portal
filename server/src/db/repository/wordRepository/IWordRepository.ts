@@ -5,7 +5,6 @@ import { UserWordsPool } from "@app/model/userWordsPool";
 import { Category } from "@app/model/category";
 
 export interface IWordRepository extends ICRUDRepository<Word> {
-  createUserPool(userId: number, poolName: string): Promise<UserWordsPool>;
   addWordToUserPool(
     poolId: number,
     wordId: number

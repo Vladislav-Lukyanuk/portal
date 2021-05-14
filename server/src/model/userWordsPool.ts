@@ -6,11 +6,11 @@ export class UserWordsPool {
   private _total_number: number;
 
   constructor(
-    id: number,
     user_id: number,
     name: string,
-    learned_number: number,
-    total_number: number
+    id = 0,
+    learned_number = 0,
+    total_number = 0
   ) {
     this._id = id;
     this._user_id = user_id;
