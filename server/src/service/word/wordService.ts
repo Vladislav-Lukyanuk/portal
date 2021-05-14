@@ -38,4 +38,8 @@ export class WordService implements IWordService {
       new UserWordsPool(userId, poolName)
     );
   }
+
+  getUserPools(userId: number): Promise<UserWordsPool[]> {
+    return this._userWordPoolRepository.getAllByUserId(userId);
+  }
 }

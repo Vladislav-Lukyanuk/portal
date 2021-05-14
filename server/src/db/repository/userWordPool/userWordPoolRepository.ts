@@ -29,6 +29,16 @@ export class UserWordPoolRepository implements IUserWordPoolRepository {
   }
 
   getALl(): Promise<UserWordsPool[]> {
-    return Promise.resolve([]);
+    return this.dbAdapter.query<UserWordsPool>(
+      "select * from user_words_pools",
+      []
+    );
+  }
+
+  getAllByUserId(userId: number): Promise<UserWordsPool[]> {
+    return this.dbAdapter.query<UserWordsPool>(
+      "select * from user_words_pools where user_id = $1",
+      [userId]
+    );
   }
 }

@@ -2,6 +2,7 @@ import { inject } from "inversify";
 import {
   BaseHttpController,
   controller,
+  httpGet,
   httpPost,
   queryParam,
 } from "inversify-express-utils";
@@ -33,5 +34,18 @@ export class WordController extends BaseHttpController {
         totalNumber: model.total_number,
       })
     );
+  }
+
+  @httpGet("/pool")
+  public async getUserWordsPool(): Promise<WordPoolDto[]> {
+    const userId = this.httpContext.user.details.id as number;
+
+    return (await this._wordService.getUserPools(userId)).map((model) => ({
+      id: model.id,
+      userId: model.user_id,
+      name: model.name,
+      learnedNumber: model.learned_number,
+      totalNumber: model.total_number,
+    }));
   }
 }

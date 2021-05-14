@@ -3,6 +3,7 @@ import { Word } from "@app/model/word";
 
 export interface IWordService {
   createUserPool(userId: number, poolName: string): Promise<UserWordsPool>;
+  getUserPools(userId: number): Promise<UserWordsPool[]>;
   addWordToUserPool(
     poolId: number,
     wordId: number
