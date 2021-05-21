@@ -21,6 +21,7 @@ let geometry: BoxGeometry;
 let material: MeshNormalMaterial;
 let mesh: Mesh;
 
+// TODO: предусмортреть динамическое изменение размеров экрана
 function init(width: number, height: number) {
   camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
   camera.position.z = 1;
