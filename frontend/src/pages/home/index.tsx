@@ -1,3 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
-export const HomePage: FC = () => <div>home page</div>;
+import { Galaxy } from "../../components/galaxy";
+
+export const HomePage: FC = () => <Galaxy />;
