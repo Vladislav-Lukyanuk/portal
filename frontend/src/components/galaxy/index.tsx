@@ -1,57 +1,26 @@
-import * as THREE from "three";
 import React, { MutableRefObject, useEffect, useRef } from "react";
-import {
-  BoxGeometry,
-  Camera,
-  Mesh,
-  MeshNormalMaterial,
-  Scene,
-  WebGLRenderer,
-} from "three";
 
 import { useWidth } from "../../hooks/useWidth";
 
-const GALAXY_ID = "glaxy-1";
-const VIEW_HEIGHT = 600;
+import { setCameraAspect } from "./camera";
+import { setRendererSize, mountRenderer } from "./renderer";
 
-let camera: Camera;
-let scene: Scene;
-let renderer: WebGLRenderer;
-let geometry: BoxGeometry;
-let material: MeshNormalMaterial;
-let mesh: Mesh;
+import { GALAXY_ID, VIEW_HEIGHT } from "./constants";
 
 // TODO: предусмортреть динамическое изменение размеров экрана
 function init(width: number, height: number) {
-  camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
-  camera.position.z = 1;
-
-  scene = new THREE.Scene();
-
-  geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-  material = new THREE.MeshNormalMaterial();
-
-  mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(width, height);
-  renderer.setAnimationLoop(animation);
-
-  document.getElementById(GALAXY_ID)?.append(renderer.domElement);
-}
-
-function animation(time: number): void {
-  mesh.rotation.x = time / 2000;
-  mesh.rotation.y = time / 1000;
-
-  renderer.render(scene, camera);
+  setCameraAspect(width, height);
+  setRendererSize(width, height);
 }
 
 export const Galaxy = () => {
   const containerRef =
     useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
   const containerWidth = useWidth(containerRef);
+
+  useEffect(() => {
+    mountRenderer();
+  }, []);
 
   useEffect(() => {
     if (!containerWidth) {
