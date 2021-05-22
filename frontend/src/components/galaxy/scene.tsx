@@ -1,8 +1,10 @@
-import * as THREE from "three";
+import { Scene } from "three";
 
 import { earth } from "./planets/earch";
 
-const scene = new THREE.Scene();
+const scene = new Scene();
+
+earth.position.set(1, 0, 0);
 
 scene.add(earth);
 
