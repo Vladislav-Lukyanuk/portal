@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-const camera = new THREE.PerspectiveCamera(70, 1, 0.01, 10);
+const camera = new THREE.PerspectiveCamera(100, 1, 0.01, 100);
 
 camera.position.z = 1;
 
