@@ -1,3 +1,4 @@
+import { sun } from "./planets/sun";
 import { mercury } from "./planets/mercury";
 import { venus } from "./planets/venus";
 import { earth } from "./planets/earch";
@@ -12,6 +13,7 @@ import { camera } from "./camera";
 import { controls, renderer } from "./renderer";
 
 const animation = (time: number): void => {
+  sun.rotation.y = -(time / 100 / 57.6);
   mercury.rotation.y = -(time / 100 / 139.2);
   venus.rotation.y = -(time / 100 / 278.4);
   earth.rotation.y = -(time / 100 / 2.4);
