@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import textureUrl from "./earth_texture.jpg";
+import textureUrl from "./textures/earth_texture.jpg";
 
-const geometry = new THREE.SphereGeometry(0.2, 32, 32);
+const geometry = new THREE.SphereGeometry(40, 32, 32);
 const texture = new THREE.TextureLoader().load(textureUrl);
 const material = new THREE.MeshBasicMaterial({ map: texture });
 
