@@ -1,26 +1,26 @@
 import { Scene } from "three";
 
 import { sun } from "./planets/sun";
-import { mercury } from "./planets/mercury";
-import { venus } from "./planets/venus";
-import { earth } from "./planets/earch";
-import { mars } from "./planets/mars";
-import { jupiter } from "./planets/jupiter";
-import { saturn } from "./planets/saturn";
-import { uranus } from "./planets/uranus";
-import { neptune } from "./planets/neptune";
+import { mercury, MERCURY_DISTANCE_FROM_SUN } from "./planets/mercury";
+import { venus, VENUS_DISTANCE_FROM_SUN } from "./planets/venus";
+import { earth, EARTH_DISTANCE_FROM_SUN } from "./planets/earch";
+import { mars, MARS_DISTANCE_FROM_SUN } from "./planets/mars";
+import { jupiter, JUPITER_DISTANCE_FROM_SUN } from "./planets/jupiter";
+import { saturn, SATURN_DISTANCE_FROM_SUN } from "./planets/saturn";
+import { uranus, URANUS_DISTANCE_FROM_SUN } from "./planets/uranus";
+import { neptune, NEPTUNE_DISTANCE_FROM_SUN } from "./planets/neptune";
 
 const scene = new Scene();
 
 sun.position.set(0, 0, 0);
-mercury.position.set(500, 0, 0);
-venus.position.set(700, 0, 0);
-earth.position.set(900, 0, 0);
-mars.position.set(1100, 0, 0);
-jupiter.position.set(1500, 0, 0);
-saturn.position.set(2000, 0, 0);
-uranus.position.set(2300, 0, 0);
-neptune.position.set(2500, 0, 0);
+mercury.position.set(MERCURY_DISTANCE_FROM_SUN, 0, 0);
+venus.position.set(VENUS_DISTANCE_FROM_SUN, 0, 0);
+earth.position.set(EARTH_DISTANCE_FROM_SUN, 0, 0);
+mars.position.set(MARS_DISTANCE_FROM_SUN, 0, 0);
+jupiter.position.set(JUPITER_DISTANCE_FROM_SUN, 0, 0);
+saturn.position.set(SATURN_DISTANCE_FROM_SUN, 0, 0);
+uranus.position.set(URANUS_DISTANCE_FROM_SUN, 0, 0);
+neptune.position.set(NEPTUNE_DISTANCE_FROM_SUN, 0, 0);
 
 scene.add(sun);
 scene.add(mercury);
