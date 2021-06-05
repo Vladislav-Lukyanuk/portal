@@ -9,7 +9,7 @@ import { GALAXY_ID } from "./constants";
 
 import { GalaxyWrapperStyled } from "./galaxy.styles";
 
-function init(width: number, height: number) {
+function resize(width: number, height: number) {
   setCameraAspect(width, height);
   setRendererSize(width, height);
 }
@@ -28,7 +28,7 @@ export const Galaxy: FC = () => {
       return;
     }
 
-    init(containerDimensions.width, containerDimensions.height);
+    resize(containerDimensions.width, containerDimensions.height);
   }, [containerDimensions.width, containerDimensions.height]);
 
   return (
