@@ -1,6 +1,6 @@
-import React, {FC, MutableRefObject, useEffect, useRef} from "react";
+import React, { FC, MutableRefObject, useEffect, useRef } from "react";
 
-import { useDimensions } from "../../hooks/useDimensions";
+import { useDimensions } from "hooks/useDimensions";
 
 import { setCameraAspect } from "./camera";
 import { setRendererSize, mountRenderer } from "./renderer";

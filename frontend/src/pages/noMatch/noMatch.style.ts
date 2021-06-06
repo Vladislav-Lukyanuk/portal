@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-import logoSrc from "../../assets/images/logo.png";
-import { H1, H4 } from "../../typography";
+import logoSrc from "assets/images/logo.png";
+
+import { H1, H4 } from "typography";
 
 export const ImageStyled = styled.img.attrs({
   src: logoSrc,

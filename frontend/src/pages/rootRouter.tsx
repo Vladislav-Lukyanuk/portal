@@ -7,11 +7,11 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import { useAuthContext } from "providers/AuthProvider";
+
 import { AuthPage } from "./authentication";
 import { HomePage } from "./home";
 import { NoMatch } from "./noMatch";
-
-import { useAuthContext } from "../providers/AuthProvider";
 
 const PrivateRoute: FC<RouteProps> = ({ children, ...rest }) => {
   const { user } = useAuthContext();
