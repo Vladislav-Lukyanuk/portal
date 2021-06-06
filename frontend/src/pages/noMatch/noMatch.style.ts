@@ -16,15 +16,15 @@ export const ErrorContainerStyled = styled.div`
   }
 `;
 
-export const HttpCodeStyled = styled(H1).attrs({
-  color: "#333",
-})`
+export const HttpCodeStyled = styled(H1).attrs(({ theme }) => ({
+  color: theme.colors.secondary[30],
+}))`
   text-align: center;
 `;
 
-export const DescriptionTextStyled = styled(H4).attrs({
-  color: "#333",
-})`
+export const DescriptionTextStyled = styled(H4).attrs(({ theme }) => ({
+  color: theme.colors.secondary[30],
+}))`
   text-align: center;
 `;
 
