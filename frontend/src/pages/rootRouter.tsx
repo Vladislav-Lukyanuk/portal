@@ -9,6 +9,7 @@ import {
 
 import { AuthPage } from "./authentication";
 import { HomePage } from "./home";
+import { NoMatch } from "./noMatch";
 
 import { useAuthContext } from "../providers/AuthProvider";
 
@@ -43,6 +44,9 @@ export const RootRouter: FC = () => (
       <PrivateRoute exact path="/">
         <Route component={HomePage} />
       </PrivateRoute>
+      <Route path="*">
+        <NoMatch />
+      </Route>
     </Switch>
   </Router>
 );

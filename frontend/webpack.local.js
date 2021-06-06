@@ -12,6 +12,7 @@ module.exports = {
     progress: true,
     // enable a hot reloading
     hot: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [

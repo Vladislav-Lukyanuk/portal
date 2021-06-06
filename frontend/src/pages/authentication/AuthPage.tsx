@@ -1,3 +1,3 @@
 import React, { FC } from "react";
 
-export const AuthPage: FC = () => <div />;
+export const AuthPage: FC = () => <div>auth</div>;

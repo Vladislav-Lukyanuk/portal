@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
+export const ResetGlobalStyles = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -43,5 +43,14 @@ export const GlobalStyle = createGlobalStyle`
     table {
         border-collapse: collapse;
         border-spacing: 0;
+    }
+`;
+
+export const GlobalStyles = createGlobalStyle`
+    body {
+      background: #f3f3f3;
+      
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
     }
 `;
